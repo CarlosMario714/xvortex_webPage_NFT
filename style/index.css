@@ -288,6 +288,55 @@ P {
   flex-direction: column;
 }
 
+.carousel {
+  border: thick solid #d938f0;
+  width: 50%;
+  height: 50vh;
+  /*overflow-x: hidden;*/ 
+  display: flex;
+}
+
+.carousel-container {
+  width: 100%;
+  
+ 
+  grid-template-columns: repeat(4,100%);
+  display: grid;
+ 
+  margin-left: -100%;
+  
+}
+
+.carousel-slide {
+  color: #000;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: aqua;
+  
+  
+  width: 100%;
+}
+
+.hola1 {
+  background-color: red;
+}
+
+.hola2 {
+  background-color: rgb(0, 47, 255);
+}
+
+.hola3 {
+  background-color: antiquewhite;
+}
+
+.hola4 {
+  background-color: rgb(221, 255, 0);
+}
+
+
 /***************************************/
 
 footer{

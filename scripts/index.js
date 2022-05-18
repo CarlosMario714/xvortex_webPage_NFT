@@ -251,3 +251,45 @@ const observador3 = new IntersectionObserver(info4, {
 observador3.observe(aboutus)
 observador3.observe(team)
 
+//Animacion slider//
+
+const carouselCont = document.querySelector(".carousel-container")
+let sliderSection = document.querySelectorAll(".carousel-slide")
+let sliderSectionlast = sliderSection[sliderSection.length - 1];
+
+const btnCarousel = document.querySelector(".btn-carrusel")
+
+carouselCont.insertAdjacentElement("afterbegin", sliderSectionlast)
+
+let count = 100
+// setInterval(() => {
+//   count++
+//   carouselCont.style.setProperty("margin-left", "-" + count + "%");
+//   carouselCont.style.setProperty("transition", "linear 1s");
+//   console.log(count)
+// }, 100)
+
+
+
+setInterval(() => {
+  count++
+  console.log(count)
+  let sliderSectionFirst = document.querySelectorAll(".carousel-slide")[0];
+  carouselCont.style.setProperty("margin-left", "-" + count + "%");
+  carouselCont.style.setProperty("transition", "linear 1s");
+  // setTimeout(() => {
+  //   //carouselCont.style.transition = "none";
+  //   carouselCont.insertAdjacentElement("beforeend", sliderSectionFirst)
+  //   carouselCont.style.marginleft = "-100%";
+  //  }, 10000)
+}, 100)
+
+// setInterval(() => {
+//   Next()
+// }, 500)
+
+btnCarousel.addEventListener("click", () => {
+  Next()
+  carouselCont.style.transition = "all 0.5s";
+})
+
