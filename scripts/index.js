@@ -262,34 +262,34 @@ const btnCarousel = document.querySelector(".btn-carrusel")
 carouselCont.insertAdjacentElement("afterbegin", sliderSectionlast)
 
 let count = 100
-// setInterval(() => {
-//   count++
-//   carouselCont.style.setProperty("margin-left", "-" + count + "%");
-//   carouselCont.style.setProperty("transition", "linear 1s");
-//   console.log(count)
-// }, 100)
-
-
+let running = false
 
 setInterval(() => {
   count++
+  running = false
   console.log(count)
   let sliderSectionFirst = document.querySelectorAll(".carousel-slide")[0];
-  carouselCont.style.setProperty("margin-left", "-" + count + "%");
-  carouselCont.style.setProperty("transition", "linear 1s");
-  // setTimeout(() => {
-  //   //carouselCont.style.transition = "none";
-  //   carouselCont.insertAdjacentElement("beforeend", sliderSectionFirst)
-  //   carouselCont.style.marginleft = "-100%";
-  //  }, 10000)
+  let sliderSectionSecond = document.querySelectorAll(".carousel-slide")[1];
+  let sliderSectionTirth= document.querySelectorAll(".carousel-slide")[2];
+  let sliderSectionFourth = document.querySelectorAll(".carousel-slide")[3];
+  
+    if (count < 200){
+      carouselCont.style.setProperty("margin-left", "-" + count + "%");
+      carouselCont.style.setProperty("transition", "linear 0.1s");
+    } else if (count === 200){
+      carouselCont.style.setProperty("margin-left", "-200%");
+      carouselCont.insertAdjacentElement("beforeend", sliderSectionFirst)
+      count = 100
+      
+    }
 }, 100)
 
 // setInterval(() => {
 //   Next()
-// }, 500)
+ //}, 500)
 
-btnCarousel.addEventListener("click", () => {
-  Next()
-  carouselCont.style.transition = "all 0.5s";
-})
+// btnCarousel.addEventListener("click", () => {
+//   Next()
+//   carouselCont.style.transition = "all 0.5s";
+// })
 

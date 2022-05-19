@@ -290,7 +290,7 @@ P {
 
 .carousel {
   border: thick solid #d938f0;
-  width: 50%;
+  width: 20%;
   height: 50vh;
   /*overflow-x: hidden;*/ 
   display: flex;
@@ -325,7 +325,7 @@ P {
 }
 
 .hola2 {
-  background-color: rgb(0, 47, 255);
+  background-color: rgb(109, 136, 255);
 }
 
 .hola3 {
