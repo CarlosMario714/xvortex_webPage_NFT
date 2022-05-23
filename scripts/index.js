@@ -256,6 +256,7 @@ observador3.observe(team)
 const carouselCont = document.querySelector(".carousel-container")
 let sliderSection = document.querySelectorAll(".carousel-slide")
 let sliderSectionlast = sliderSection[sliderSection.length - 1];
+console.log(sliderSection)
 
 const btnCarousel = document.querySelector(".btn-carrusel")
 
@@ -267,21 +268,24 @@ let running = false
 setInterval(() => {
   count++
   running = false
-  console.log(count)
+  //console.log(count)
   let sliderSectionFirst = document.querySelectorAll(".carousel-slide")[0];
-  let sliderSectionSecond = document.querySelectorAll(".carousel-slide")[1];
-  let sliderSectionTirth= document.querySelectorAll(".carousel-slide")[2];
-  let sliderSectionFourth = document.querySelectorAll(".carousel-slide")[3];
+  let sliderSectionSecond = sliderSection[1];
+  let sliderSectionTirth= sliderSection[2];
+  let sliderSectionFourth = sliderSection[3];
   
     if (count < 200){
       carouselCont.style.setProperty("margin-left", "-" + count + "%");
       carouselCont.style.setProperty("transition", "linear 0.1s");
     } else if (count === 200){
-      carouselCont.style.setProperty("margin-left", "-200%");
-      carouselCont.insertAdjacentElement("beforeend", sliderSectionFirst)
       count = 100
+      carouselCont.style.setProperty("transition", "none");
+      //carouselCont.style.setProperty("margin-left", "-200%");
+      carouselCont.insertAdjacentElement("beforeend", sliderSectionFirst)
       
-    }
+    } 
+    
+    
 }, 100)
 
 // setInterval(() => {
