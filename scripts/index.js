@@ -11,6 +11,9 @@ const texto3 = document.getElementById("estesi")
 const generation1 = document.querySelector('.generation1')
 const textoScroll3 = document.querySelector('.textoScroll3')
 const botton = document.getElementById('botton')
+const multiverse = document.querySelector('.logo h1:nth-child(3)')
+const video = document.querySelector('.video video')
+const buttonPlay = document.querySelector('.buttonPlay')
 
 const text = "The year is 3055." 
             +"Exul is the 4th planet in the Sericom galaxy were a solar year takes 700 days."          
@@ -52,18 +55,31 @@ async function typeWriter() {
   }
 }
 
-function opacidad(){
+function opacidad() {
+  logo.style.opacity = "0.8";
+  logo.style.paddingTop = '0'
+}
+
+function opacidad2() {
+  multiverse.style.opacity = "1";
+}
+
+function opacidad3() {
     logo.style.opacity = ".2";
     content.style.display = "flex";
     typeWriter() 
-
 }
 
-window.addEventListener("load", () => {
-  logo.style.opacity = "1";
-  logo.style.paddingTop = '0'
 
-  setTimeout(opacidad, 2000);           
+buttonPlay.addEventListener("click", () => {
+  
+  video.play()
+  video.style.opacity = "1"
+  buttonPlay.style.opacity = "0"
+
+  setTimeout(opacidad, 13000)
+  setTimeout(opacidad2, 16000)
+  setTimeout(opacidad3, 20000);           
 
 });
 
