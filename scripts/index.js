@@ -7,13 +7,14 @@ const textoScroll = document.querySelector('.textoScroll')
 const footer = document.getElementById("footer")
 const parrafo2 = document.getElementById("parrafo2");
 const textoScroll2 = document.querySelector('.textoScroll2')
-const texto3 = document.getElementById("estesi")
+const parrafo3 = document.querySelector(".parrafo3")
 const generation1 = document.querySelector('.generation1')
 const textoScroll3 = document.querySelector('.textoScroll3')
 const botton = document.getElementById('botton')
 const multiverse = document.querySelector('.logo h1:nth-child(3)')
 const video = document.querySelector('.video video')
 const buttonPlay = document.querySelector('.buttonPlay')
+const logo2 = document.querySelector('.logo2')
 
 const text = "The year is 3055." 
             +"Exul is the 4th planet in the Sericom galaxy were a solar year takes 700 days."          
@@ -65,7 +66,7 @@ function opacidad2() {
 }
 
 function opacidad3() {
-    logo.style.opacity = ".2";
+    logo.style.opacity = "0";
     content.style.display = "flex";
     typeWriter() 
 }
@@ -156,7 +157,7 @@ async function typeWriter2() {
       setTimeout(typeWriter2, time);
   } else {
       botton.style.opacity = "1";
-      textoScroll2.style.opacity = '1'
+      
       botton.firstElementChild.innerHTML = "< PREVIOUS";
       textoScroll.style.opacity = '1'
       i = 0;
@@ -166,8 +167,11 @@ async function typeWriter2() {
 const info3 = (entradas) => {
   entradas.forEach((entrada) => {
     if(entrada.isIntersecting){
-      texto3.style.opacity = "1"
+      parrafo3.style.opacity = "1"
       generation1.style.opacity = "1"
+      logo2.style.setProperty("animation", "logo2 6s linear")
+      logo2.style.setProperty("animation-fill-mode", "forwards")
+      textoScroll2.style.opacity = '1'
     } else {
       
     }
@@ -181,7 +185,7 @@ const observador2 = new IntersectionObserver(info3, {
 })
 
 observador2.observe(generation1)
-observador2.observe(texto3)
+observador2.observe(parrafo3)
 
 //Animacion pagina 4 About Us//
 

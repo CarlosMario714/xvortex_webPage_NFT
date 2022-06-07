@@ -16,8 +16,70 @@
   scroll-snap-type: block mandatory;
 }
 
+section{
+  color: rgb(254, 254, 254);
+  position: relative;
+  display: flex;
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center;
+  height: 100vh;
+  scroll-snap-align: center;
+}
+
+section:nth-child(1) {
+  background: url(../img/Fondoplaneta.png);
+  background-size: cover;
+}
+
+section:nth-child(2),
+section:nth-child(3) {
+  background: url(../img/fondo-estrellas2.jpg);
+  background-size: cover;
+}
+
+.content{
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 1s;
+  scroll-snap-align: center;
+}
+
+.video {
+  position: absolute;
+  top: 150px;
+  left: 250px;
+  width: 70%;
+  height: auto;
+  z-index: 0;
+}
+
+
+.video video {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: all 2s linear;
+}
+
+.buttonPlay {
+  display: absolute;
+  z-index: 5;
+  scale: 5;
+}
+
+.buttonPlay:hover {
+  transition: all 1s linear;
+  scale: 6;
+}
+
 .logo{
-  position: fixed; 
+  position: absolute; 
   color: black;
   opacity: 0;
   padding-top: 100px;
@@ -50,62 +112,6 @@
   transition: all 1s linear;
   opacity: 0;
 }
-
-section{
-  color: rgb(254, 254, 254);
-  background: black;
-  display: flex;
-  flex-direction: column; 
-  justify-content: center; 
-  align-items: center;
-  height: 100vh;
-  scroll-snap-align: center;
-}
-
-section:nth-child(2) {
-  background: linear-gradient(to bottom, #F92D02, #FB6000, black 30%);
-}
-
-.content{
-  position: relative;
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  transition: all 1s;
-  scroll-snap-align: center;
-}
-
-.video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-}
-
-
-.video video {
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: all 2s linear;
-}
-
-.buttonPlay {
-  display: absolute;
-  z-index: 5;
-  scale: 5;
-}
-
-.buttonPlay:hover {
-  transition: all 1s linear;
-  scale: 6;
-}
-
 
 .parrafo2,
 .parrafo {
@@ -185,25 +191,69 @@ P {
   color: black;
 }
 
+.logo2 {
+  position: absolute; 
+  color: rgba(255, 255, 255, 0.85);
+  bottom: 100px;
+  right: 300px;
+  transition: all 1s linear;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  animation: none;
+  /* animation-fill-mode: forwards; */
+}
+
+.logo2 h1:nth-child(1),
+.logo2 h1:nth-child(2) {
+  /* background-color: aqua; */
+  font-family: 'long-shot';
+  font-size: 250px;
+  text-align: center;
+  line-height: 220px;
+}
+
+.logo2 h1:nth-child(3) {
+  /* background-color: aqua; */
+  font-family: 'long-shot';
+  color: white;
+  font-size: 75px;
+  text-align: center;
+  line-height: 25px;
+  margin-left: -20px;
+  transition: all 1s linear;
+}
+
+@keyframes logo2 {
+  
+  100%{
+    transform: translate(-200px, -200px);
+  }
+  
+}
+
 .textoScroll2 {
   font-family: 'Orbitron', sans-serif;
   opacity: 0;
-  transition: 2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  transition: 10s;
   position: absolute;
+  bottom: 200px;
+  left: 400px;
   height: 20px;
   bottom: 50px;
   font-size: 15px;
 }
 
-
 .contenido3 {
+  width: 800px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  
   justify-content: center;
-  gap: 500px;
+  gap: 40px;
   flex-wrap: wrap;
 }
 
@@ -213,6 +263,9 @@ P {
 }
 
 .generation1 {
+  position: absolute;
+  top: 400px;
+  left: 200px;
   font-family: 'Orbitron', sans-serif;
   color: rgba(255, 255, 255, 0.9);
   font-size: 2em;
@@ -222,6 +275,9 @@ P {
   align-items: center;
   justify-content: center;
   text-align: center;
+  transition: 3s;
+  opacity: 0;
+
 }
 
 .generation1 h1 {
@@ -245,9 +301,35 @@ P {
   text-align: center;
 }
 
-.contenido3 p,
-.contenido3 li{
-  font-size: 30px;
+.parrafo3 {
+  text-align: center;
+  position: absolute;
+  left: 200px;
+  top: 150px;
+  width: 30%;
+  opacity: 0;
+  transition: 3s;
+}
+
+.planeta {
+  position: absolute;
+  right: 0px;
+  bottom: 250px;
+  height: 650px;
+  width: auto;
+  z-index: 2;
+  transition: 3s
+}
+
+.ultimocontainer {
+  height: 100vh;
+  width: 100%;
+  background: url(../img/fondo-estrellas2.jpg);
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
 }
 
 .aboutus {
@@ -261,7 +343,7 @@ P {
 
 .team{
   display: flex;
-  gap: 900px;
+  gap: 500px;
   opacity: 0;
   transition: 3s;
   flex-wrap: wrap;
@@ -398,7 +480,7 @@ footer a:hover{
     top: 100px;
   }
   .team{
-    gap: 600px;
+    gap: 300px;
   }
 }
 @media (max-width: 1410px){
