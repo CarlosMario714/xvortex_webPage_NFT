@@ -65,6 +65,10 @@
             <source src="./Video/Earthquake.mp4" type="video/mp4">
           </video>
         </div>
+
+        <div class="planeta2">
+            <img src="./img/Planeta1.png">
+        </div>
         <div class="texto" >
           <p id="parrafo" class="parrafo visible"></p>
           <p id="parrafo2" class="parrafo2"></p>
@@ -86,7 +90,11 @@
         <h1>OUT</h1>
         <h1>MULTIVERSE</h1>
       </div>
-          <p id="parrafo3" class="parrafo3">
+      <div id="idioma">
+        <button class="idiomaEs" data-language="es">es</button>
+        <button class="idiomaEn" data-language="en">en</button>
+      </div>
+          <p id="parrafo3" class="parrafo3" data-section="pagina2" data-value="desription">
             LIFE OUT aims to launch 6006
             NFTs in three generations.
             The First Generation will be launched as 
@@ -94,13 +102,15 @@
           </p> 
         
         <div class="generation1">
-          <h1>
+          <h1 data-section="pagina2" data-value="titulo">
             GENERATION 1
           </h1>
           <ul>
-            <li>999 NFTs will be launched via Public Sale.</li>
-            <li>Release Date: June 30/2022</li>
-            <li>Price: 0.3 ETH</li>
+            <li data-section="pagina2" data-value="lista1">999 NFTs will be launched via Public Sale.</li>
+
+            <li data-section="pagina2" data-value="lista2">Release Date: June 30/2022</li>
+
+            <li data-section="pagina2" data-value="lista3">Price: 0.3 ETH</li>
           </ul>
         </div>
         
@@ -115,7 +125,7 @@
     </section>
     <section>
     <div class="content"  id="content">
-      <div class="ultimocontainer">
+      
         <h1 class="aboutus">
           About Us
         </h1> 
@@ -178,7 +188,6 @@
               <li><a href="https://www.instagram.com/lifeoutmultiverse/" target="_blank">Instagram</a></li>
           </ul>
         </footer>
-      </div>
     </div>
   </section>
   </div>

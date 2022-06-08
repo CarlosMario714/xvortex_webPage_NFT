@@ -187,6 +187,28 @@ const observador2 = new IntersectionObserver(info3, {
 observador2.observe(generation1)
 observador2.observe(parrafo3)
 
+//cambio de idioma//
+
+const elementoIdiomas = document.getElementById("idioma")
+
+const textsToChange = document.querySelectorAll("[data-section]")
+
+const changeLanguage = async language => {
+  const requestJson = await fetch(`../languages/${language}.json`)
+  const texts = await requestJson.json()
+
+  for (const textToChange of textsToChange){
+    const section = textToChange.dataset.section
+    const value = textToChange.dataset.value
+
+    textToChange.innerHTML = texts[section][value]
+  }
+}
+
+elementoIdiomas.addEventListener("click", (e) => {
+  changeLanguage(e.target.dataset.language)
+})
+
 //Animacion pagina 4 About Us//
 
 const aboutus = document.querySelector(".aboutus")

@@ -13,10 +13,12 @@
   flex-direction: column;
   height: 100vh;
   overflow-y: scroll;
-  scroll-snap-type: block mandatory;
+  /* scroll-snap-type: block mandatory; */
 }
 
 section{
+  background: url(../img/fondo-estrellas2.jpg);
+  background-size: cover;
   color: rgb(254, 254, 254);
   position: relative;
   display: flex;
@@ -25,17 +27,7 @@ section{
   align-items: center;
   height: 100vh;
   scroll-snap-align: center;
-}
-
-section:nth-child(1) {
-  background: url(../img/Fondoplaneta.png);
-  background-size: cover;
-}
-
-section:nth-child(2),
-section:nth-child(3) {
-  background: url(../img/fondo-estrellas2.jpg);
-  background-size: cover;
+  z-index: 0;
 }
 
 .content{
@@ -52,11 +44,13 @@ section:nth-child(3) {
 
 .video {
   position: absolute;
-  top: 150px;
-  left: 250px;
-  width: 70%;
+  top: 100px;
+  left: 190px;
+  width: 80%;
   height: auto;
   z-index: 0;
+  clip-path: circle(35% at 50% 50%);
+  z-index: 1;
 }
 
 
@@ -89,7 +83,7 @@ section:nth-child(3) {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 1;
+  z-index: 3;
 }
 
 .logo h1:nth-child(1),
@@ -119,6 +113,7 @@ section:nth-child(3) {
     position: absolute;
     opacity: 0;
     transition: all .2s linear;
+    z-index: 5;
 }
 
 .visible{
@@ -162,11 +157,11 @@ P {
 }
 
 .botton{
-    white-space: nowrap;
-    display: flex;
-    opacity: 0;
-    transition: all 1s linear;
-    z-index: 10;
+  white-space: nowrap;
+  display: flex;
+  opacity: 0;
+  transition: all 1s linear;
+  z-index: 10;
 }
 
 .botton p{
@@ -189,6 +184,15 @@ P {
   height: 20px;
   font-size: 15px;
   color: black;
+}
+
+.planeta2 {
+  position: absolute;
+  left: 150px;
+  top: -70px;
+  height: 500px;
+  width: auto;
+  z-index: 0;
 }
 
 .logo2 {
@@ -318,18 +322,16 @@ P {
   height: 650px;
   width: auto;
   z-index: 2;
-  transition: 3s
+  transition: 3s;
 }
 
-.ultimocontainer {
-  height: 100vh;
-  width: 100%;
-  background: url(../img/fondo-estrellas2.jpg);
-  background-size: cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 5;
+#idioma {
+  width: 50px;
+  height: 50px;
+  background-color: aqua;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .aboutus {
@@ -350,6 +352,8 @@ P {
   align-items: center;
   justify-content: center;
 }
+
+
 
 
 .team1,
