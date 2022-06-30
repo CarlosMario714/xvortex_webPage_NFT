@@ -16,7 +16,7 @@ botones.addEventListener("click", (e) => {
   })
 })
 
-function showButtons(){
+function showButtons() {
   botones.classList.toggle('visible')
 }
 
@@ -24,11 +24,11 @@ menuContainer.onclick = showButtons
 
 // change language
 
-async function language(element){
+async function language(element) {
   const requestJson = await fetch(`../languages/${element}.json`)
   const texts = await requestJson.json()
 
-  for( const translatetext of translatetexts ){
+  for (const translatetext of translatetexts) {
     const section = translatetext.dataset.content
     const type = translatetext.dataset.type
 
@@ -39,16 +39,16 @@ async function language(element){
 let selectedLanguage = "en"
 
 idioma.addEventListener('click', (e) => {
-  if(e.target.dataset.function === 'en'){
+  if (e.target.dataset.function === 'en') {
     language(e.target.dataset.function)
     selectedLanguage = "en"
   }
 
-  if(e.target.dataset.function === 'es'){
+  if (e.target.dataset.function === 'es') {
     language(e.target.dataset.function)
     selectedLanguage = "es"
   }
-  
+
 })
 
 //Codigo Minteo//
@@ -60,6 +60,8 @@ const closeAlert = document.querySelectorAll('.closeAlert');
 const connectedToMainet = document.querySelector('.connectedToMainet');
 const disConnectedToMainet = document.querySelector('.disConnectedToMainet');
 const showAlert = document.querySelector('.showAlert');
+const errorAlert = document.querySelector('.errorsAlert');
+const errorText = document.querySelector('.errorText');
 const amountContainer = document.querySelector('.amount');
 const btnAdd = document.querySelector('.add');
 const btnSubstract = document.querySelector('.subtract');
@@ -69,110 +71,108 @@ const btnRefresh = document.querySelector('.refresh');
 const nftSoldsItem = document.querySelector('.solds');
 const contractAdress = "0x08D05998Fe1eC6EB8c8858c4566d9842Cb01eA6C"
 const contractAbi = [
-    {
-        "inputs": [],
-        "name": "mintCost",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "amountNft",
-                "type": "uint256"
-            }
-        ],
-        "name": "mintLifeOutGenesis",
-        "outputs": [],
-        "stateMutability": "payable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "tokenIdCounter",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "_value",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    }
+  {
+    "inputs": [],
+    "name": "mintCost",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "amountNft",
+        "type": "uint256"
+      }
+    ],
+    "name": "mintLifeOutGenesis",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "tokenIdCounter",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "_value",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
 ]
-  
+
 let provider,
-    provider2,
-    signer
+  provider2,
+  signer,
+  totalNftSolds
 
-window.addEventListener("load", async function(e) {
-  if(window.ethereum){
-        
-        
-        provider2 = ethers.getDefaultProvider()   
-        
+window.addEventListener("load", async function (e) {
+  if (window.ethereum) {
 
-        const contract = new ethers.Contract(contractAdress, contractAbi, provider2);
-        const token = await contract.tokenIdCounter()
-        const totalNftSolds = token.toNumber() - 1
+    await nftSoldsLanguage()
 
-        if (selectedLanguage === "en"){
-        nftSoldsItem.innerHTML = "NFTs Sold: " + totalNftSolds + " / 999"
-        } else {
-        nftSoldsItem.innerHTML = "NFTs Vendidos: " + totalNftSolds + " / 999"
-        }
-        
-        if (totalNftSolds >= 999){
-        nftSoldsItem.innerHTML = "Sold Out"
-        btnMint.disabled = true
-        btnAdd.disabled = true
-        btnSubstract.disabled = true
-        btnRefresh.disabled = true
-        } else {
-        btnAdd.disabled = false
-        btnSubstract.disabled = false
-        btnMint.disabled = false
-        btnRefresh.disabled = false
-        }
-        
   } else {
-      installAlert.classList.add("showAlert")
-        
+    installAlert.classList.add("showAlert")
   }
 })
 
+//muestra la cantidad de nfts vendidos segun el idioma
+async function nftSoldsLanguage() {
+  provider2 = ethers.getDefaultProvider()
+  const contract = new ethers.Contract(contractAdress, contractAbi, provider2);
+  const token = await contract.tokenIdCounter()
+  totalNftSolds = token.toNumber() - 1
 
+  if (selectedLanguage === "en") {
+    nftSoldsItem.innerHTML = "NFTs Sold: " + totalNftSolds + " / 999"
+  } else {
+    nftSoldsItem.innerHTML = "NFTs Vendidos: " + totalNftSolds + " / 999"
+  }
+
+  if (totalNftSolds >= 999) {
+    nftSoldsItem.innerHTML = "Sold Out"
+    disableButtons(true)
+  } else {
+    disableButtons(false)
+  }
+}
+
+btnRefresh.onclick = nftSoldsLanguage
+
+//desabilitar botones
+function disableButtons(boolean) {
+  btnMint.disabled = boolean
+  btnAdd.disabled = boolean
+  btnSubstract.disabled = boolean
+  btnRefresh.disabled = boolean
+}
 
 //desabilitar botones en dispositivos moviles
 window.addEventListener("resize", () => {
-    if (window.innerWidth < 500){
-        btnMint.disabled = true
-        btnAdd.disabled = true
-        btnSubstract.disabled = true
-        btnRefresh.disabled = true
-    } else {
-        btnAdd.disabled = false
-        btnSubstract.disabled = false
-        btnMint.disabled = false
-        btnRefresh.disabled = false
-    }
+  if (window.innerWidth < 500) {
+    disableButtons(true)
+  } else {
+    disableButtons(false)
+  }
 })
 
 // login and logout
 
 let isConnected = false
 
-botonConnect.addEventListener('click',async function() {
-  if (!isConnected){
+botonConnect.addEventListener('click', async function () {
+  if (!isConnected) {
     login()
   } else {
     //log out
@@ -180,68 +180,58 @@ botonConnect.addEventListener('click',async function() {
   }
 })
 
-async function login(){
+async function login() {
 
-  if(window.ethereum){
+  if (window.ethereum) {
 
     connectWallet()
     changeChain()
 
-  }else{
+  } else {
     installAlert.classList.add("showAlert")
-    
-    
   }
 }
 
 // get metamask permissions
 
-async function connectWallet(){
+async function connectWallet() {
 
   await window.ethereum
-        .request({ method: 'wallet_requestPermissions',
-                             params: [
-                                  {
-                                 eth_accounts: {}
-                                  }
-                                ]
-                          })
-        .then(() => {
+    .request({ method: 'eth_requestAccounts' })
+    .then(() => {
+      let catch1 = /^\w{5}/
+      let catch2 = /\w{4}$/
+      let test1 = ethereum.selectedAddress.match(catch1)
+      let test2 = ethereum.selectedAddress.match(catch2)
+      btnConnectWallet.innerHTML = test1 + '...' + test2
+      botonConnect.innerHTML = "Disconect"
 
-            let catch1 = /^\w{5}/
-            let catch2 = /\w{4}$/
-            let test1 = ethereum.selectedAddress.match(catch1)
-            let test2 = ethereum.selectedAddress.match(catch2)
-            btnConnectWallet.innerHTML = test1 + '...' + test2
-            botonConnect.innerHTML = "Disconect"
+      isConnected = true
 
-            isConnected = true
-            
-
-        }).catch((x) => {
-            console.log(x.message)
-        })
+    }).catch((x) => {
+      errorText.innerHTML = `${x.message}`;
+      errorAlert.classList.add("showAlert")
+    })
 }
 
 // change web3 chain
 
-async function changeChain(){
+async function changeChain() {
   ethereum.on('chainChanged', (chainId) => {
 
-    if(chainId === '0x1'){
-    
+    if (chainId === '0x1') {
+
       disConnectedToMainet.classList.remove("showAlert")
       connectedToMainet.classList.add("showAlert")
       connectedToMainet.style.zIndex = 50
 
       setTimeout(() => {
-        
         connectedToMainet.classList.remove("showAlert")
         connectedToMainet.style.zIndex = 0
-        
+
       }, 5000)
 
-    }else{
+    } else {
 
       disConnectedToMainet.classList.add("showAlert")
 
@@ -251,23 +241,23 @@ async function changeChain(){
 
   return await window.ethereum.request({
     "id": 1,
-        "jsonrpc": "2.0",
-        "method": "wallet_switchEthereumChain",
-        "params": [
-            {
-            "chainId": "0x1",
-            }
-        ]
-        })   
+    "jsonrpc": "2.0",
+    "method": "wallet_switchEthereumChain",
+    "params": [
+      {
+        "chainId": "0x1",
+      }
+    ]
+  })
 }
 
 //close alerts//
-    closeAlert.forEach((alert) => {
-        alert.addEventListener('click', function() {
-        connectedToMainet.classList.remove("showAlert")
-        disConnectedToMainet.classList.remove("showAlert")
-        installAlert.classList.remove("showAlert")
-    })  
+closeAlert.forEach((alert) => {
+  alert.addEventListener('click', () => {
+    disConnectedToMainet.classList.remove("showAlert")
+    installAlert.classList.remove("showAlert")
+    errorAlert.classList.remove("showAlert")
+  })
 })
 
 //NFT amount//
@@ -275,40 +265,37 @@ async function changeChain(){
 let amountNfts = Number(amountContainer.innerHTML)
 
 btnSubstract.addEventListener('click', () => {
-  if(amountNfts > 1){
-      amountNfts--
-      amountContainer.innerHTML = amountNfts
+  if (amountNfts > 1) {
+    amountNfts--
+    amountContainer.innerHTML = amountNfts
   }
 })
 
 btnAdd.addEventListener('click', () => {
-  if(amountNfts < 3){
-      amountNfts++
-      amountContainer.innerHTML = amountNfts
+  if (amountNfts < 3) {
+    amountNfts++
+    amountContainer.innerHTML = amountNfts
   }
 })
 
 //btn Mint
-btnMint.addEventListener("click", async() => {
-  if(isConnected){
-    if(ethereum.chainId === '0x1'){
-        
+btnMint.addEventListener("click", async () => {
+  if (isConnected) {
+    if (ethereum.chainId === '0x1') {
       mint()
     } else {
       changeChain()
     }
   } else {
     disConnectedToMainet.classList.add("showAlert")
-      
-    
   }
 })
 
 async function mint() {
 
   provider = new ethers.providers.Web3Provider(window.ethereum)
-  signer = provider.getSigner();   
-  
+  signer = provider.getSigner();
+
   const contract = new ethers.Contract(contractAdress, contractAbi, signer);
   //costo en hex//
   const costoMint = await contract.mintCost()
@@ -321,37 +308,18 @@ async function mint() {
 
   //costo en formato ether//
   // let valEth = ethers.utils.formatEther(valueWei) 
-  
-  
-  return await contract.mintLifeOutGenesis(amountNfts, {value: total})
+
+  return await contract.mintLifeOutGenesis(amountNfts, { value: total })
     .then((tx) => {
       viewOnEtherscan.style.display = "block"
       viewOnEtherscan.href = "https://etherscan.io/tx/"
       viewOnEtherscan.href += tx.hash
     })
-    .catch((x) => console.log(x.error.message))
+    .catch((x) => {
+      errorText.innerHTML = `${x.message}`;
+      errorAlert.classList.add("showAlert")
+    })
 }
-
-//btn Refresh solds
-
-async function nftSolds() { 
-  const contract = new ethers.Contract(contractAdress, contractAbi, provider2);
-  const token = await contract.tokenIdCounter()
-  const totalNftSolds = token.toNumber() - 1
-
-  if (selectedLanguage === "en"){
-    nftSoldsItem.innerHTML = "NFTs Sold: " + totalNftSolds + " / 999"
-  } else {
-    nftSoldsItem.innerHTML = "NFTs Vendidos: " + totalNftSolds + " / 999"
-  }
-
-  if (totalNftSolds >= 999){
-    nftSoldsItem.innerHTML = "Sold Out"
-    btnMint.disabled = true
-  }
-}
-
-btnRefresh.onclick = nftSolds
 
 
 

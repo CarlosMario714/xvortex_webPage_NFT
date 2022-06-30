@@ -483,7 +483,8 @@ article{
 
 .installAlert,
 .connectedToMainet,
-.disConnectedToMainet {
+.disConnectedToMainet,
+.errorsAlert {
   position: fixed;
   left: 0px;
   bottom: 150px;
@@ -499,9 +500,17 @@ article{
   z-index: 20;
 }
 
+.errorsAlert p {
+  width: 450px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 .installAlert img,
 .connectedToMainet img,
-.disConnectedToMainet img {
+.disConnectedToMainet img,
+.errorsAlert img {
   position: absolute;
   left: 30px;
   width: 30px;
